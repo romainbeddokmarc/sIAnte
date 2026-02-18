@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>slAnte — Orientation</title>
+
+  <style>
+    :root{
+      --bg: #0b1220;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --line: rgba(255,255,255,.12);
+      --primary: #7c3aed;
+      --primary2: #22c55e;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 10% 10%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(800px 520px at 90% 20%, rgba(34,197,94,.25), transparent 55%),
+        radial-gradient(900px 600px at 40% 100%, rgba(59,130,246,.18), transparent 55%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    a{ color: inherit; }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 18px 60px;
+    }
+
+    header{
+      display:flex;
+      justify-content: space-between;
+      align-items:flex-end;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .title{
+      display:flex;
+      flex-direction:column;
+      gap: 6px;
+    }
+
+    h1{
+      font-size: 28px;
+      margin:0;
+      letter-spacing: .2px;
+    }
+
+    .subtitle{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.35;
+      max-width: 66ch;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.04));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .card h2{
+      margin: 0 0 10px 0;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 520px){
+      .row{ grid-template-columns: 1fr; }
+    }
+
+    label{
+      display:block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    input, select{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      outline: none;
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    input::placeholder{ color: rgba(255,255,255,.45); }
+
+    .checks{
+      margin-top: 10px;
+      display:grid;
+      gap: 8px;
+    }
+
+    .check{
+      display:flex;
+      gap: 10px;
+      padding: 10px 10px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: 14px;
+    }
+
+    .check input{ margin-top: 3px; width:auto; }
+    .check b{ font-size: 14px; }
+    .check span{ display:block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+
+    .actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    button{
+      border: 0;
+      cursor: pointer;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: .2px;
+    }
+
+    .btn-primary{
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(59,130,246,1));
+      color:white;
+    }
+
+    .btn-ghost{
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+
+    .result{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 12px;
+      margin-bottom: 8px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+    }
+
+    .b-danger{ background: rgba(239,68,68,.14); }
+    .b-warn{ background: rgba(245,158,11,.14); }
+    .b-ok{ background: rgba(34,197,94,.14); }
+
+    .result p{ margin: 6px 0 0 0; color: var(--muted); line-height: 1.45; }
+    .result ul{ margin: 8px 0 0 18px; color: var(--muted); line-height: 1.5; }
+
+    .small{
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,.55);
+      line-height: 1.45;
+    }
+
+    .side p{ margin: 0; color: var(--muted); line-height: 1.45; }
+    .side ul{ margin: 10px 0 0 18px; color: var(--muted); line-height: 1.55; }
+    .side .mini{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="title">
+        <h1>slAnte</h1>
+        <p class="subtitle">
+          Orientation rapide (informatif) : aide à repérer les <b>signes d’alerte</b> et à choisir une action.
+        </p>
+      </div>
+      <div class="pill">🧠 Prototype — GitHub Pages</div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Questionnaire</h2>
+
+        <div class="row">
+          <div>
+            <label for="age">Âge</label>
+            <input id="age" type="number" min="0" max="120" placeholder="ex : 38" />
+          </div>
+          <div>
+            <label for="symptom">Motif principal</label>
+            <select id="symptom">
+              <option value="general">Symptômes généraux</option>
+              <option value="chest">Douleur thoracique</option>
+              <option value="breath">Essoufflement</option>
+              <option value="neuro">Déficit neurologique (parole/bras…)</option>
+              <option value="abdo">Douleur abdominale</option>
+              <option value="fever">Fièvre</option>
+              <option value="injury">Traumatisme / plaie</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="checks" aria-label="signes d'alerte">
+          <div class="check">
+            <input id="red1" type="checkbox" />
+            <div>
+              <b>Altération de l’état général / malaise important</b>
+              <span>faiblesse marquée, confusion, impossibilité de se lever, etc.</span>
+            </div>
+          </div>
+          <div class="check">
+            <input id="red2" type="checkbox" />
+            <div>
+              <b>Douleur intense ou qui s’aggrave rapidement</b>
+              <span>douleur inhabituelle, “pire que d’habitude”, progression rapide</span>
+            </div>
+          </div>
+          <div class="check">
+            <input id="red3" type="checkbox" />
+            <div>
+              <b>Essoufflement, lèvres bleutées, difficulté à parler</b>
+              <span>respiration difficile au repos ou effort minimal</span>
+            </div>
+          </div>
+          <div class="check">
+            <input id="red4" type="checkbox" />
+            <div>
+              <b>Signes neuro soudains</b>
+              <span>parole trouble, visage/asymétrie, faiblesse d’un bras/jambe</span>
+            </div>
+          </div>
+          <div class="check">
+            <input id="red5" type="checkbox" />
+            <div>
+              <b>Saignement incontrôlable / plaie profonde</b>
+              <span>saignement abondant malgré compression</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn-primary" onclick="evaluate()">Analyser</button>
+          <button class="btn-ghost" onclick="resetForm()">Réinitialiser</button>
+        </div>
+
+        <div id="result" class="result" style="display:none;"></div>
+
+        <div class="small">
+          ⚠️ Cet outil ne remplace pas une consultation. En cas de doute, aggravation ou inquiétude : appelle le 15 / 112.
+        </div>
+      </section>
+
+      <aside class="card side">
+        <h2>Rappels utiles</h2>
+        <p>
+          Ce prototype met l’accent sur les <b>signes d’alerte</b>.  
+          Sans signe d’alerte, une consultation rapide (médecin / téléconsultation / centre) peut suffire.
+        </p>
+
+        <div class="mini">
+          <b>Quand appeler immédiatement ?</b>
+          <ul>
+            <li>douleur thoracique oppressante</li>
+            <li>essoufflement au repos</li>
+            <li>déficit neurologique brutal</li>
+            <li>malaise, confusion, somnolence inhabituelle</li>
+            <li>saignement important, plaie profonde</li>
+          </ul>
+        </div>
+
+        <div class="mini">
+          <b>Conseils “en attendant”</b>
+          <ul>
+            <li>reste accompagné si possible</li>
+            <li>note l’heure de début des symptômes</li>
+            <li>prépare liste des traitements / allergies</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    function evaluate(){
+      const symptom = document.getElementById("symptom").value;
+      const age = Number(document.getElementById("age").value || 0);
+
+      const reds = ["red1","red2","red3","red4","red5"].some(id => document.getElementById(id).checked);
+
+      // Petite logique simple (volontairement prudente)
+      let level = "ok"; // ok | warn | danger
+      let title = "Plutôt non urgent";
+      let message = "Aucun signe d’alerte sélectionné. Une consultation (médecin / centre / téléconsultation) peut suffire si les symptômes persistent.";
+      let actions = [
+        "Surveille l’évolution dans les prochaines heures.",
+        "Consulte rapidement si ça dure > 24–48h ou si tu es inquiet."
+      ];
+
+      // Cas prudents par type
+      const highRiskSymptom = ["chest","breath","neuro"].includes(symptom);
+      if (highRiskSymptom && (age >= 50)) {
+        level = "warn";
+        title = "Prudence : avis médical rapide";
+        message = "Le motif est potentiellement sensible (thorax/respiration/neuro), surtout après 50 ans. Sans signe d’alerte, un avis médical rapide reste recommandé.";
+        actions = [
+          "Appelle un service médical/centre si symptômes récents.",
+          "Si aggravation ou doute → 15 / 112."
+        ];
+      }
+
+      // Signe d'alerte = urgence
+      if (reds || symptom === "neuro") {
+        level = "danger";
+        title = "Potentiellement urgent";
+        message = "Un ou plusieurs éléments peuvent évoquer une situation urgente. Il est préférable de contacter les urgences ou le 15/112 selon le contexte.";
+        actions = [
+          "Appelle le 15 / 112 si symptômes sévères, brutaux ou aggravation.",
+          "Ne conduis pas seul si malaise ou essoufflement."
+        ];
+      }
+
+      renderResult(level, title, message, actions);
+    }
+
+    function renderResult(level, title, message, actions){
+      const el = document.getElementById("result");
+      el.style.display = "block";
+
+      let badgeClass = "b-ok";
+      let icon = "✅";
+      if(level === "warn"){ badgeClass = "b-warn"; icon = "🟠"; }
+      if(level === "danger"){ badgeClass = "b-danger"; icon = "🚨"; }
+
+      el.innerHTML = `
+        <div class="badge ${badgeClass}">${icon} ${title}</div>
+        <p>${message}</p>
+        <ul>${actions.map(a => `<li>${a}</li>`).join("")}</ul>
+      `;
+    }
+
+    function resetForm(){
+      document.getElementById("age").value = "";
+      document.getElementById("symptom").value = "general";
+      ["red1","red2","red3","red4","red5"].forEach(id => document.getElementById(id).checked = false);
+      const el = document.getElementById("result");
+      el.style.display = "none";
+      el.innerHTML = "";
+    }
+  </script>
+</body>
+</html>
+
